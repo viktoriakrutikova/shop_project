@@ -1,4 +1,4 @@
-import json
+п»їimport json
 from eshop.exceptions.shop_error import ShopError
 
 class JSONStorage:
@@ -11,7 +11,7 @@ class JSONStorage:
             with open(self.filename, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
         except Exception as e:
-            raise ShopError(f"Не удалось сохранить JSON: {e}")
+            raise ShopError(f"РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕС…СЂР°РЅРёС‚СЊ JSON: {e}")
 
     def load_products(self) -> list:
         try:
@@ -20,4 +20,4 @@ class JSONStorage:
         except FileNotFoundError:
             return []
         except Exception as e:
-            raise ShopError(f"Не удалось прочитать JSON: {e}")
+            raise ShopError(f"РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРѕС‡РёС‚Р°С‚СЊ JSON: {e}")

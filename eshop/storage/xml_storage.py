@@ -1,4 +1,4 @@
-import xml.etree.ElementTree as ET
+п»їimport xml.etree.ElementTree as ET
 from eshop.exceptions.shop_error import ShopError
 
 class XMLStorage:
@@ -17,7 +17,7 @@ class XMLStorage:
             tree = ET.ElementTree(root)
             tree.write(self.filename, encoding="utf-8", xml_declaration=True)
         except Exception as e:
-            raise ShopError(f"Не удалось сохранить XML: {e}")
+            raise ShopError(f"РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕС…СЂР°РЅРёС‚СЊ XML: {e}")
 
     def load_products(self) -> list:
         try:
@@ -33,4 +33,4 @@ class XMLStorage:
         except FileNotFoundError:
             return []
         except Exception as e:
-            raise ShopError(f"Не удалось прочитать XML: {e}")
+            raise ShopError(f"РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРѕС‡РёС‚Р°С‚СЊ XML: {e}")

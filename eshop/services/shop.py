@@ -1,4 +1,4 @@
-from typing import List
+ï»¿from typing import List
 from eshop.models.product import Product
 from eshop.exceptions.price_error import PriceError
 from eshop.exceptions.not_found_error import NotFoundError
@@ -9,9 +9,9 @@ class ShopService:
 
     def add_product(self, product: Product) -> None:
         if product.price <= 0:
-            raise PriceError("Öåíà äîëæíà áûòü áîëüøå íóëÿ!")
+            raise PriceError("Ð¦ÐµÐ½Ð° Ð´Ð¾Ð»Ð¶Ð½Ð° Ð±Ñ‹Ñ‚ÑŒ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½ÑƒÐ»Ñ!")
         if product.quantity < 0:
-            raise PriceError("Êîëè÷åñòâî íå ìîæåò áûòü îòðèöàòåëüíûì!")
+            raise PriceError("ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼!")
         self.products.append(product)
 
     def get_all(self) -> List[Product]:
@@ -21,12 +21,12 @@ class ShopService:
         for p in self.products:
             if p.product_id == product_id:
                 return p
-        raise NotFoundError(f"Òîâàð ñ ID {product_id} íå íàéäåí.")
+        raise NotFoundError(f"Ð¢Ð¾Ð²Ð°Ñ€ Ñ ID {product_id} Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½.")
 
     def update_price(self, product_id: int, new_price: float) -> None:
         product = self.get_by_id(product_id)
         if new_price <= 0:
-            raise PriceError("Öåíà äîëæíà áûòü áîëüøå íóëÿ!")
+            raise PriceError("Ð¦ÐµÐ½Ð° Ð´Ð¾Ð»Ð¶Ð½Ð° Ð±Ñ‹Ñ‚ÑŒ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½ÑƒÐ»Ñ!")
         product.price = new_price
 
     def delete_product(self, product_id: int) -> None:

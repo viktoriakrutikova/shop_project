@@ -1,4 +1,4 @@
-from eshop.models.customer import Customer
+﻿from eshop.models.customer import Customer
 from eshop.models.product import Product
 
 class Order:

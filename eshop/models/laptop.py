@@ -1,4 +1,4 @@
-from eshop.models.product import Product
+﻿from eshop.models.product import Product
 
 class Laptop(Product):
     def __init__(self, product_id: int, name: str, price: float, quantity: int, cpu: str):

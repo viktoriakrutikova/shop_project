@@ -1,5 +1,5 @@
-from eshop.exceptions.shop_error import ShopError
+п»їfrom eshop.exceptions.shop_error import ShopError
 
 class NotFoundError(ShopError):
-    """Ошибка, если объект не найден."""
+    """РћС€РёР±РєР°, РµСЃР»Рё РѕР±СЉРµРєС‚ РЅРµ РЅР°Р№РґРµРЅ."""
     pass

@@ -1,5 +1,5 @@
-from eshop.exceptions.shop_error import ShopError
+п»їfrom eshop.exceptions.shop_error import ShopError
 
 class PriceError(ShopError):
-    """Ошибка при неверно указанной цене или количестве."""
+    """РћС€РёР±РєР° РїСЂРё РЅРµРІРµСЂРЅРѕ СѓРєР°Р·Р°РЅРЅРѕР№ С†РµРЅРµ РёР»Рё РєРѕР»РёС‡РµСЃС‚РІРµ."""
     pass

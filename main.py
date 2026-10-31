@@ -1,4 +1,5 @@
 ﻿from eshop.services.shop import ShopService
+from eshop.models.product import Product
 from eshop.models.smartphone import Smartphone
 from eshop.models.laptop import Laptop
 from eshop.models.headphones import Headphones
@@ -6,6 +7,30 @@ from eshop.models.smartwatch import Smartwatch
 from eshop.storage.json_storage import JSONStorage
 from eshop.storage.xml_storage import XMLStorage
 from eshop.exceptions.shop_error import ShopError
+
+def recreate_product(d):
+    if not isinstance(d, dict):
+        return d
+    p_id = int(d.get("product_id", d.get("id", 0)))
+    name = d.get("name", "")
+    price = float(d.get("price", 0.0))
+    qty = int(d.get("quantity", 0))
+    
+    if "ram" in d:
+        return Smartphone(p_id, name, price, qty, int(d["ram"]))
+    elif "cpu" in d:
+        return Laptop(p_id, name, price, qty, str(d["cpu"]))
+    elif "is_wireless" in d:
+        val = d["is_wireless"]
+        if isinstance(val, str):
+            is_w = val.lower() in ("true", "да", "1", "yes")
+        else:
+            is_w = bool(val)
+        return Headphones(p_id, name, price, qty, is_w)
+    elif "strap_material" in d:
+        return Smartwatch(p_id, name, price, qty, str(d["strap_material"]))
+    else:
+        return Product(p_id, name, price, qty)
 
 def main():
     shop = ShopService()
@@ -24,6 +49,7 @@ def main():
         print("8. Сохранить в JSON")
         print("9. Загрузить из JSON")
         print("10. Сохранить в XML")
+        print("11. Загрузить из XML")
         print("0. Выход")
 
         choice = input("Выберите пункт меню: ")
@@ -98,17 +124,27 @@ def main():
 
             elif choice == "9":
                 raw_data = json_db.load_products()
+                shop.products.clear()
+                for item in raw_data:
+                    shop.add_product(recreate_product(item))
                 print(f"Загружено из JSON записей: {len(raw_data)}")
 
             elif choice == "10":
                 xml_db.save_products(shop.get_all())
                 print("Данные сохранены в XML")
 
+            elif choice == "11":
+                raw_data = xml_db.load_products()
+                shop.products.clear()
+                for item in raw_data:
+                    shop.add_product(recreate_product(item))
+                print(f"Загружено из XML записей: {len(raw_data)}")
+
             elif choice == "0":
                 print("Выход из программы")
                 break
             else:
-                print("Неверный выбор, попробуйте от 0 до 10")
+                print("Неверный выбор, попробуйте от 0 до 11")
 
         except ShopError as err:
             print(f"[Ошибка магазина]: {err}")

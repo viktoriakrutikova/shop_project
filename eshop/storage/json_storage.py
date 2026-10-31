@@ -15,7 +15,7 @@ class JSONStorage:
 
     def load_products(self) -> list:
         try:
-            with open(self.filename, "r", encoding="utf-8") as f:
+            with open(self.filename, "r", encoding="utf-8-sig") as f:
                 return json.load(f)
         except FileNotFoundError:
             return []

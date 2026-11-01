@@ -16,8 +16,8 @@ def recreate_product(d):
     price = float(d.get("price", 0.0))
     qty = int(d.get("quantity", 0))
     
-    if "ram" in d:
-        return Smartphone(p_id, name, price, qty, int(d["ram"]))
+    if "ram_gb" in d:
+        return Smartphone(p_id, name, price, qty, int(d["ram_gb"]))
     elif "cpu" in d:
         return Laptop(p_id, name, price, qty, str(d["cpu"]))
     elif "is_wireless" in d:
